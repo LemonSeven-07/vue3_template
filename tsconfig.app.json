@@ -1,0 +1,100 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    /* =========================
+     * 基础编译配置
+     * ========================= */
+
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    // 指定 TS 编译目标
+    "target": "es2020",
+
+    // 使用的模块规范
+    "module": "esnext",
+
+    // 模块解析策略（Vite 推荐 bundler）
+    "moduleResolution": "Bundler",
+
+    // 允许导入 TS 扩展名
+    "allowImportingTsExtensions": true,
+
+    // 允许 JSON 导入
+    "resolveJsonModule": true,
+
+    // 强制每个文件都可独立编译
+    "isolatedModules": true,
+
+    // 不生成 JS（Vite负责构建）
+    "noEmit": true,
+
+    // JSX 保留给 Vue JSX 插件处理
+    "jsx": "preserve",
+
+    // 强制把所有文件当作模块处理，防止全局作用域污染
+    "moduleDetection": "force",
+
+    /* =========================
+     * 严格模式（大厂重点）
+     * ========================= */
+
+    // 开启严格模式
+    "strict": true,
+
+    // 禁止隐式 any
+    "noImplicitAny": true,
+
+    // 禁止未使用局部变量
+    "noUnusedLocals": true,
+
+    // 禁止未使用参数
+    "noUnusedParameters": true,
+
+    // 禁止 switch case 穿透
+    "noFallthroughCasesInSwitch": true,
+
+    // 严格 null 检查
+    "strictNullChecks": true,
+
+    // 防止数组越界
+    "noUncheckedIndexedAccess": true,
+
+    /* =========================
+     * 路径别名
+     * ========================= */
+
+    // 路径映射
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    /* =========================
+     * 类型声明
+     * ========================= */
+
+    // 全局类型
+    "types": ["vite/client"],
+
+    /* =========================
+     * Lib
+     * ========================= */
+
+    // 浏览器 + ES API
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    /* =========================
+     * 兼容性
+     * ========================= */
+
+    // 允许 JS 文件
+    "allowJs": false,
+
+    // 跳过第三方库检查（提升速度）
+    "skipLibCheck": true,
+
+    // 强制模块语法
+    "verbatimModuleSyntax": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

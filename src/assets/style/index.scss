@@ -1,0 +1,5 @@
+@use './variables.module.scss' as *;
+
+:root {
+  --global-color: #{$globalColor};
+}
