@@ -4,6 +4,7 @@ import tseslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import { defineConfig } from 'eslint/config';
+import autoImport from './.eslintrc-auto-import.json' with { type: 'json' };
 
 export default defineConfig([
   {
@@ -13,12 +14,13 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.node
+        ...globals.node,
+        ...autoImport.globals
       }
     }
   },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],
   {
     files: ['**/*.vue'], // 校验 Vue 文件中的 ts 代码

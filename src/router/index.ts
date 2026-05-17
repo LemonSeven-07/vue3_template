@@ -1,16 +1,23 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import { defineAsyncComponent } from 'vue';
+import { useUserStore } from '@/store/user';
 
 const routes = [
   {
     path: '/',
-    name: 'tasks',
-    component: defineAsyncComponent(() => import('@/pages/Tasks/index.vue'))
+    component: defineAsyncComponent(() => import('@/pages/Home/index.vue'))
   },
+
   {
-    path: '/task/:id',
-    name: 'task',
-    component: defineAsyncComponent(() => import('@/pages/TaskDetail/index.vue'))
+    path: '/login',
+    component: defineAsyncComponent(() => import('@/pages/Login/index.vue'))
+  },
+
+  {
+    path: '/profile',
+    component: defineAsyncComponent(() => import('@/pages/Profile/index.vue')),
+    meta: {
+      requiresAuth: true
+    }
   }
 ];
 
@@ -22,6 +29,11 @@ const router = createRouter({
 // 全局前置路由守卫
 router.beforeEach((to, from) => {
   console.log('全局前置路由守卫', to, from);
+  const userStore = useUserStore();
+  if (to.meta.requiresAuth && !userStore.token) {
+    return '/login';
+  }
+
   return true;
 });
 

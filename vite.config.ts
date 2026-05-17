@@ -167,7 +167,11 @@ export default defineConfig({
       // api
       imports: ['vue', 'vue-router', 'pinia'], // 自动导入这些库的 API
       resolvers: [ElementPlusResolver()], // 自动导入 Element Plus API
-      eslintrc: { enabled: true } // 自动生成 ESLint 声明
+      eslintrc: {
+        enabled: true,
+        filepath: './.eslintrc-auto-import.json'
+      }, // 自动生成 ESLint 声明
+      dts: 'src/auto-imports.d.ts'
     }),
 
     // 自动注册组件
@@ -178,7 +182,11 @@ export default defineConfig({
       ],
       // 所有的组件可以自动加载
       dirs: ['src/components'],
-      include: [/\.vue$/, /\.jsx$/]
+      include: [/\.vue$/, /\.jsx$/, /\.tsx$/],
+      deep: true,
+      directoryAsNamespace: true,
+      collapseSamePrefixes: true,
+      dts: 'src/components.d.ts'
     }),
 
     // Element Plus 样式按需加载
